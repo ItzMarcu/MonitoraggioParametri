@@ -65,9 +65,6 @@ def verifica_token(token: str = Depends(oauth2_scheme)):
 # --- ROTTA DI LOGIN (Richiesta da login.html) ---
 @app.post("/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    print(f"DEBUG LOGIN - Username inserito: {form_data.username} | Atteso: {MY_USERNAME}")
-    print(f"DEBUG LOGIN - Hash caricato sul server: {MY_PASSWORD_HASH}")
-    
     if not MY_PASSWORD_HASH:
         raise HTTPException(status_code=500, detail="Errore di configurazione del server (Hash mancante)")
         
