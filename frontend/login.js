@@ -25,7 +25,7 @@ const API_URL = "https://monitoraggioparametri.onrender.com";
                     localStorage.setItem("token", data.access_token);
                     
                     // Reindirizziamo alla dashboard principale
-                    window.location.href = "index.html";
+                    window.location.href = "dashboard.html";
                 } else {
                     alert("Credenziali errate. Accesso negato.");
                 }
