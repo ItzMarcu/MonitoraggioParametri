@@ -5,10 +5,11 @@ from psycopg import rows
 from dotenv import load_dotenv
 import os
 
+origins = ["https://itzmarcu.github.io"]
 app = FastAPI(name="DatiCuoreAPI")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
