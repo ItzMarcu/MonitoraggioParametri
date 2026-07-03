@@ -3,7 +3,8 @@ const API_URL = "https://monitoraggioparametri.onrender.com";
 
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("token");
-    if (!token) {
+    if (!token || token === "undefined" || token === "null") {
+        localStorage.removeItem("token"); // Pulisci eventuali sporcizie
         window.location.href = "index.html";
         return;
     }
@@ -55,8 +56,13 @@ async function caricaDati() {
 
     try {
         const response = await fetch(`${API_URL}/ottieni-dati`);
+        if (response.status === 401) {
+            localStorage.removeItem("token");
+            window.location.href = "index.html";
+            return;
+        }
+        
         if (!response.ok) throw new Error("Errore nel recupero dei dati");
-
         let listaDati = await response.json();
         listaDati.sort((a, b) => new Date(b.data) - new Date(a.data));
         container.innerHTML = "";
@@ -98,7 +104,5 @@ async function caricaDati() {
     } catch (error) {
         console.error(error);
         container.innerHTML = "<p class='text-red-400 col-span-2 text-center py-4'>Errore durante il caricamento dello storico.</p>";
-        localStorage.removeItem("token");
-        window.location.href = "index.html";
     }
 }
