@@ -1,36 +1,43 @@
 const API_URL = "https://monitoraggioparametri.onrender.com";
 
-        document.getElementById("loginForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("token");
+    if (token && token !== "undefined" || token === "null") {
+        window.location.href = "dashboard.html";
+    }
+});
 
-            const username = document.getElementById("usernameInput").value;
-            const password = document.getElementById("passwordInput").value;
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-            // FastAPI si aspetta i dati del login come form urlencoded, non come JSON puro
-            const formData = new URLSearchParams();
-            formData.append("username", username);
-            formData.append("password", password);
+    const username = document.getElementById("usernameInput").value;
+    const password = document.getElementById("passwordInput").value;
 
-            try {
-                const response = await fetch(`${API_URL}/login`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                    body: formData
-                });
+    // FastAPI si aspetta i dati del login come form urlencoded, non come JSON puro
+    const formData = new URLSearchParams();
+    formData.append("username", username);
+    formData.append("password", password);
 
-                if (response.ok) {
-                    const data = await response.json();
-                    
-                    // Salviamo il codice di sblocco (Token JWT) nel browser
-                    localStorage.setItem("token", data.access_token);
-                    
-                    // Reindirizziamo alla dashboard principale
-                    window.location.href = "dashboard.html";
-                } else {
-                    alert("Credenziali errate. Accesso negato.");
-                }
-            } catch (error) {
-                console.error("Errore di connessione:", error);
-                alert("Impossibile connettersi al server di autenticazione.");
-            }
+    try {
+        const response = await fetch(`${API_URL}/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: formData
         });
+
+        if (response.ok) {
+            const data = await response.json();
+
+            // Salviamo il codice di sblocco (Token JWT) nel browser
+            localStorage.setItem("token", data.access_token);
+
+            // Reindirizziamo alla dashboard principale
+            window.location.href = "dashboard.html";
+        } else {
+            alert("Credenziali errate. Accesso negato.");
+        }
+    } catch (error) {
+        console.error("Errore di connessione:", error);
+        alert("Impossibile connettersi al server di autenticazione.");
+    }
+});
