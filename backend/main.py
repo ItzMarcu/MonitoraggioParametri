@@ -14,7 +14,7 @@ load_dotenv()
 # --- CONFIGURAZIONE SICUREZZA ---
 SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 120  # Il login scade dopo 2 ore
+ACCESS_TOKEN_EXPIRE_MINUTES = 10 
 
 # Credenziali caricate dal .env o da Render
 MY_USERNAME = os.getenv("APP_USERNAME", "admin")
