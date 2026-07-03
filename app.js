@@ -4,7 +4,7 @@ const API_URL = "https://monitoraggioparametri.onrender.com";
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("token");
     if (!token) {
-        window.location.href = "login.html";
+        window.location.href = "index.html";
         return;
     }
 
@@ -99,6 +99,6 @@ async function caricaDati() {
         console.error(error);
         container.innerHTML = "<p class='text-red-400 col-span-2 text-center py-4'>Errore durante il caricamento dello storico.</p>";
         localStorage.removeItem("token");
-        window.location.href = "login.html";
+        window.location.href = "index.html";
     }
 }
