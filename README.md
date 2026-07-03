@@ -1,4 +1,4 @@
-# 🫀 DatiCuoreAPI & MonitoraggioParametri
+# 🫀 MonitoraggioParametri
 
 <p align="center">
   <img src="frontend/assets/DatiCuore.png" alt="Logo Progetto" width="120" height="120">
