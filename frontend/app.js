@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     caricaDati();
 });
 
+
 document.getElementById("dataForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
