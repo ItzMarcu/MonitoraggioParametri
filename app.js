@@ -2,6 +2,12 @@
 const API_URL = "https://monitoraggioparametri.onrender.com";
 
 document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
+
     const oraLocale = new Date();
     oraLocale.setMinutes(oraLocale.getMinutes() - oraLocale.getTimezoneOffset());
     document.getElementById("dataInput").value = oraLocale.toISOString().slice(0, 16);
@@ -92,5 +98,7 @@ async function caricaDati() {
     } catch (error) {
         console.error(error);
         container.innerHTML = "<p class='text-red-400 col-span-2 text-center py-4'>Errore durante il caricamento dello storico.</p>";
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
     }
 }
