@@ -52,8 +52,8 @@ def load_data(data: str = None, frequenza_cardiaca: int = None, pressione: int =
     cursor = conn.cursor()
 
     QUERY = """
-        INSERT INTO DatiCuore (id_registrazione,data, frequenza_cardiaca, pressione, saturazione)
-        VALUES (1, %s, %s, %s, %s)
+        INSERT INTO DatiCuore (data, frequenza_cardiaca, pressione, saturazione)
+        VALUES (%s, %s, %s, %s)
     """
 
     try: 
