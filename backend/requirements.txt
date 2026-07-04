@@ -6,3 +6,4 @@ jose
 python-jose[cryptography]
 bcrypt
 python-multipart
+pydantic
