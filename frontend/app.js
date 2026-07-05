@@ -69,7 +69,8 @@ document.getElementById("dataForm").addEventListener("submit", async (e) => {
 async function recuperaInfoUtente() {
     const token = localStorage.getItem("token");
     try {
-        const response = await fetch(`${API_URL}/utente/me`, {
+        // Sostituisci la vecchia riga con questa stringa diretta senza variabili:
+        const response = await fetch("https://monitoraggioparametri.onrender.com/utente/me", {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`
