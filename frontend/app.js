@@ -69,7 +69,7 @@ document.getElementById("dataForm").addEventListener("submit", async (e) => {
 async function recuperaInfoUtente() {
     const token = localStorage.getItem("token");
     try {
-        const response = await fetch('${API_URL}/utente/me', {
+        const response = await fetch(`${API_URL}/utente/me`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`
