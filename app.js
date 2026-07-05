@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (dataInput) {
         dataInput.value = oraLocale.toISOString().slice(0, 16);
     }
+
+    recuperaInfoUtente();
     caricaDati();
 });
 
@@ -63,6 +65,32 @@ document.getElementById("dataForm").addEventListener("submit", async (e) => {
         alert("Impossibile connettersi al server backend.");
     }
 });
+
+async function recuperaInfoUtente() {
+    const token = localStorage.getItem("token");
+    try {
+        const response = await fetch('${API_URL}/utente/me', {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        if (response.status === 401) {
+            localStorage.removeItem("token");
+            window.location.href = "index.html";
+            return;
+        }
+
+        if (response.ok) {
+            const data = await response.json();
+            document.getElementById("usernameDisplay").textContent = data.username;
+        }
+    } catch (error) {
+        console.error("Errore nel recupero informazioni utente:", error);
+        document.getElementById("usernameDisplay").textContent = "Utente";
+    }
+}
 
 async function caricaDati() {
     const container = document.getElementById("cardsContainer");
