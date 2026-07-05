@@ -40,7 +40,7 @@ document.getElementById("dataForm").addEventListener("submit", async (e) => {
         const response = await fetch(`${API_URL}/registra-dati?${params.toString()}`, {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${token}` // Allega il token per salvare i dati
+                "Authorization": `Bearer ${token}` 
             }
         });
 
