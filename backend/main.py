@@ -126,6 +126,29 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
     return {"access_token": access_token, "token_type": "bearer"}
 
 # --- ROTTE PROTETTE (Filtrate per id_utente) ---
+@app.get("/utente/me")
+def get_current_user(id_utente: int = Depends(verifica_token)):
+    conn = db_connect()
+    cursor = conn.cursor(row_factory=rows.dict_row)
+    QUERY = "SELECT username FROM utenti WHERE id_utente = %s"
+
+    try:
+        cursor.execute(QUERY, (id_utente,))
+        user = cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+
+        if not user:
+            raise HTTPException(status_code=404, detail="Errore: utente non trovato!")
+        
+        return {"username": user["username"]}
+    
+    except Exception as e: 
+        cursor.close()
+        conn.close()
+
+        raise HTTPException(status_code=500, detail=f"Errore: {e}")
 
 @app.get("/ottieni-dati")
 def get_data(id_utente: int = Depends(verifica_token)):
