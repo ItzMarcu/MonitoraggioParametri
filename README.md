@@ -1,11 +1,11 @@
 # 🫀 MonitoraggioParametri
 
 <p align="center">
-  <img src="frontend/assets/DatiCuore.png" alt="Logo Progetto" width="120" height="120">
+  <img src="frontend/assets/DatiCuore.png" alt="Project Logo" width="120" height="120">
 </p>
 
 <p align="center">
-  <strong>Un registro biometrico privato, minimale ed esclusivo per il tracciamento dei parametri vitali.</strong>
+  <strong>A private, minimalist, and exclusive biometric log for tracking vital parameters.</strong>
 </p>
 
 <p align="center">
@@ -19,57 +19,57 @@
 
 ## 🖤 Overview
 
-**MonitoraggioParametri** è una web app responsive e cifrata nata dall'esigenza di avere un diario clinico personale, sicuro e accessibile solo al proprietario. Il sistema è protetto da un muro di autenticazione **OAuth2 con JWT**, che blinda i dati salvati su un database relazionale remoto impedendo qualsiasi tipo di lettura o scrittura non autorizzata.
+**MonitoraggioParametri** is a responsive and encrypted web app born from the need to have a personal, secure clinical diary accessible only to its owner. The system is protected by an **OAuth2 with JWT** authentication wall, securing data saved on a remote relational database to prevent any unauthorized read or write operations.
 
-L'interfaccia adotta un design scuro e raffinato, ottimizzato con un approccio *mobile-first* per una consultazione rapida e immediata sia da desktop che da smartphone.
-
----
-
-## 🚀 Architettura Tecnica
-
-Il progetto è strutturato seguendo un modello a servizi disaccoppiati (Decoupled Architecture) a costo zero di gestione:
-
-* **Frontend**: Interfaccia statica ospitata su **GitHub Pages**, costruita in HTML5 e **Tailwind CSS**, con gestione asincrona degli stati tramite JavaScript nativo (`Fetch API`).
-* **Backend**: API RESTful ad altissime prestazioni sviluppata in Python con **FastAPI**, deployata su **Render**.
-* **Database**: Istanza cloud serverless **PostgreSQL** ospitata sulla piattaforma **Neon**.
+The interface features a sleek, refined dark design, optimized with a *mobile-first* approach for quick and immediate viewing on both desktops and smartphones.
 
 ---
 
-## 🔒 Funzionalità Chiave & Sicurezza
+## 🚀 Technical Architecture
 
-* **Gate di Autenticazione**: Accesso protetto tramite form url-encoded. Nessun form di registrazione pubblico; le credenziali sono immutabili e gestite dal proprietario del server.
-* **Criptazione Bcrypt**: Le password vengono verificate a basso livello tramite passaggi hash nativi, senza memorizzazione in chiaro.
-* **Sessioni Temporizzate**: Generazione di token crittografici **JWT (HS256)** con scadenza automatica impostata a 120 minuti per impedire il dirottamento della sessione.
-* **Layout Mobile-First**: Griglie adattive avanzate (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`) che trasformano lo storico da card affiancate su PC a un feed verticale pulito ed ergonomico su display ridotti.
+The project is structured following a decoupled services model (Decoupled Architecture) at zero management cost:
+
+* **Frontend**: Static interface hosted on **GitHub Pages**, built with HTML5 and **Tailwind CSS**, featuring asynchronous state management via native JavaScript (`Fetch API`).
+* **Backend**: High-performance RESTful API developed in Python using **FastAPI**, deployed on **Render**.
+* **Database**: Serverless cloud **PostgreSQL** instance hosted on the **Neon** platform.
 
 ---
 
-## 🛠️ Stack Tecnologico
+## 🔒 Key Features & Security
+
+* **Authentication Gate**: Secure login via url-encoded form. No public registration form; credentials are immutable and managed directly by the server owner.
+* **Bcrypt Encryption**: Passwords are verified at a low level using native hashing steps, without plaintext storage.
+* **Timed Sessions**: Generation of cryptographic **JWT (HS256)** tokens with an automatic expiration set to 120 minutes to prevent session hijacking.
+* **Mobile-First Layout**: Advanced adaptive grids (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`) that transform the history log from side-by-side cards on PC to a clean, ergonomic vertical feed on smaller screens.
+
+---
+
+## 🛠️ Tech Stack
 
 ### Backend
 * **Python 3.12**
-* **FastAPI** (Routing, dipendenze e validazione)
-* **Psycopg 3** (Driver PostgreSQL nativo e performante)
-* **Python-Jose** & **Bcrypt** (Gestione dei token e hashing crittografico)
+* **FastAPI** (Routing, dependencies, and validation)
+* **Psycopg 3** (Native and high-performance PostgreSQL driver)
+* **Python-Jose** & **Bcrypt** (Token management and cryptographic hashing)
 
 ### Frontend
 * **HTML5** & **JavaScript ES6+**
-* **Tailwind CSS** (Interfaccia via CDN)
-* **LocalStorage API** (Persistenza sicura del Bearer Token sul client)
+* **Tailwind CSS** (Interface via CDN)
+* **LocalStorage API** (Secure storage of the Bearer Token on the client)
 
 ---
 
-## 📦 Struttura della Repository
+## 📦 Repository Structure
 
 ```text
 ├── backend/
-│   ├── main.py               # Logica core, rotte API e middleware di sicurezza
-│   ├── requirements.txt      # Dipendenze Python necessarie per il server
-│   └── .env                  # Variabili d'ambiente locali (Database e JWT)
+│   ├── main.py               # Core logic, API routes, and security middleware
+│   ├── requirements.txt      # Required Python dependencies for the server
+│   └── .env                  # Local environment variables (Database and JWT)
 └── frontend/
-    ├── index.html            # Schermata di Login (Punto d'accesso di GitHub Pages)
-    ├── dashboard.html        # Pannello privato con form e storico card
-    ├── login.js              # Gestione sottomissione form e archiviazione token JWT
-    ├── app.js                # Intercettazione token, fetch protette e rendering dinamico
+    ├── index.html            # Login screen (GitHub Pages entry point)
+    ├── dashboard.html        # Private dashboard with form and card history
+    ├── login.js              # Form submission handling and JWT token storage
+    ├── app.js                # Token interception, protected fetches, and dynamic rendering
     └── assets/
-        └── DatiCuore.png     # Icona ufficiale dell'applicazione
+        └── DatiCuore.png     # Official application icon
