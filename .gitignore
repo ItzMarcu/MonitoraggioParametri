@@ -1,3 +1,5 @@
 .env
 TODO.txt
 image.png
+.venv
+backend/__pycache__
